@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BriefEngine - Document Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
+    <style>
+        /* Asegurarnos que las pestañas funcionan correctamente */
+        .tab-content {
+            display: none !important;
+        }
+
+        .tab-content.active {
+            display: flex !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-alt"></i> BriefEngine</h1>
+            <p>AI-powered document summarization</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="tabs">
+                    <button id="upload-tab" class="tab-button active">Upload Document</button>
+                    <button id="text-tab" class="tab-button">Input Text</button>
+                </div>
+
+                <div id="file-upload-section" class="tab-content active">
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop your document or click to browse</p>
+                        <p><small>Supported formats: PDF, DOCX, TXT (max 16MB)</small></p>
+                        <input type="file" id="file-upload" accept=".pdf,.docx,.txt">
+                    </div>
+
+                    <div id="upload-message" class="message-container"></div>
+
+                    <div class="options-section">
+                        <div class="option-group">
+                            <label for="summary-length-upload">Summary Length:</label>
+                            <select id="summary-length-upload">
+                                <option value="very-short">Very Short</option>
+                                <option value="short">Short</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="long">Long</option>
+                                <option value="very-long">Very Long</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="summary-type-upload">Summary Style:</label>
+                            <select id="summary-type-upload">
+                                <option value="paragraph" selected>Paragraph</option>
+                                <option value="bullet-points">Bullet Points</option>
+                                <option value="numbered-list">Numbered List</option>
+                                <option value="key-points">Key Points</option>
+                                <option value="executive">Executive Summary</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="advanced-options">
+                        <details>
+                            <summary>
+                                <i class="fas fa-cog"></i> Advanced Options
+                            </summary>
+                            <div class="advanced-options-content">
+                                <div class="option-group">
+                                    <label for="focus-upload">Focus on:</label>
+                                    <select id="focus-upload">
+                                        <option value="balanced" selected>Balanced</option>
+                                        <option value="facts">Facts & Data</option>
+                                        <option value="concepts">Main Concepts</option>
+                                        <option value="conclusions">Conclusions</option>
+                                        <option value="arguments">Arguments</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label for="tone-upload">Tone:</label>
+                                    <select id="tone-upload">
+                                        <option value="neutral" selected>Neutral</option>
+                                        <option value="academic">Academic</option>
+                                        <option value="business">Business</option>
+                                        <option value="conversational">Conversational</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <button id="summarize-upload-btn" class="primary-button">
+                        <i class="fas fa-magic"></i> Generate Summary from Document
+                    </button>
+                </div>
+
+                <div id="text-input-section" class="tab-content">
+                    <textarea id="input-text" placeholder="Paste your document text here to summarize..."></textarea>
+
+                    <div id="text-message" class="message-container"></div>
+
+                    <div class="options-section">
+                        <div class="option-group">
+                            <label for="summary-length-text">Summary Length:</label>
+                            <select id="summary-length-text">
+                                <option value="very-short">Very Short</option>
+                                <option value="short">Short</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="long">Long</option>
+                                <option value="very-long">Very Long</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="summary-type-text">Summary Style:</label>
+                            <select id="summary-type-text">
+                                <option value="paragraph" selected>Paragraph</option>
+                                <option value="bullet-points">Bullet Points</option>
+                                <option value="numbered-list">Numbered List</option>
+                                <option value="key-points">Key Points</option>
+                                <option value="executive">Executive Summary</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="advanced-options">
+                        <details>
+                            <summary>
+                                <i class="fas fa-cog"></i> Advanced Options
+                            </summary>
+                            <div class="advanced-options-content">
+                                <div class="option-group">
+                                    <label for="focus-text">Focus on:</label>
+                                    <select id="focus-text">
+                                        <option value="balanced" selected>Balanced</option>
+                                        <option value="facts">Facts & Data</option>
+                                        <option value="concepts">Main Concepts</option>
+                                        <option value="conclusions">Conclusions</option>
+                                        <option value="arguments">Arguments</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label for="tone-text">Tone:</label>
+                                    <select id="tone-text">
+                                        <option value="neutral" selected>Neutral</option>
+                                        <option value="academic">Academic</option>
+                                        <option value="business">Business</option>
+                                        <option value="conversational">Conversational</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+
+                    <button id="summarize-text-btn" class="primary-button">
+                        <i class="fas fa-magic"></i> Generate Summary from Text
+                    </button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Summary</h2>
+                <div id="summary-result">
+                    <p class="placeholder-text">Your summary will appear here...</p>
+                </div>
+                <button id="copy-btn" class="secondary-button" disabled>
+                    <i class="fas fa-copy"></i> Copy to Clipboard
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; Rafael Nieto Soto.</p>
+        </footer>
+
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+            <p>Generating your summary...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
