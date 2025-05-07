@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function uploadFile(file) {
         console.log("Uploading file to server");
-        loadingOverlay.style.display = 'flex';
+        loadingOverlay.classList.add('active');
         loadingOverlay.querySelector('p').textContent = 'Processing your document...';
         
         const formData = new FormData();
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showUploadMessage(`File upload failed: ${error.message}`, 'error');
         })
         .finally(() => {
-            loadingOverlay.style.display = 'none';
+            loadingOverlay.classList.remove('active');
         });
     }
 
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateSummary(text, length, type, focus, tone) {
         console.log("Generating summary with:", { length, type, focus, tone });
         // Show loading overlay
-        loadingOverlay.style.display = 'flex';
+        loadingOverlay.classList.add('active');
         loadingOverlay.querySelector('p').textContent = 'Generating your summary...';
         
         // Prepare request data
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             console.log("Summary generation successful");
             // Hide loading overlay
-            loadingOverlay.style.display = 'none';
+            loadingOverlay.classList.remove('active');
             
             if (data.error) {
                 showError(data.error);
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error("Summary generation error:", error);
             // Hide loading overlay
-            loadingOverlay.style.display = 'none';
+            loadingOverlay.classList.remove('active');
             
             console.error('Error:', error);
             showError(`Failed to generate summary: ${error.message}`);
@@ -362,6 +362,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to show error messages in summary section
     function showError(message) {
+        loadingOverlay.classList.remove('active');
+        console.error(message);
+        alert('Error: ' + message);
         summaryResult.innerHTML = `<p class="error-message" style="color: var(--error-color);">${message}</p>`;
         copyBtn.disabled = true;
     }
@@ -371,6 +374,9 @@ document.addEventListener('DOMContentLoaded', function() {
         textMessage.innerHTML = `<p>${message}</p>`;
         textMessage.className = 'message-container';
         textMessage.classList.add(type);
+        textMessage.style.opacity = '1';
+        textMessage.style.visibility = 'visible';
+        textMessage.style.transform = 'translateY(0)';
     }
 
     // Function to show upload message in upload section
@@ -378,12 +384,18 @@ document.addEventListener('DOMContentLoaded', function() {
         uploadMessage.innerHTML = `<p>${message}</p>`;
         uploadMessage.className = 'message-container';
         uploadMessage.classList.add(type);
+        uploadMessage.style.opacity = '1';
+        uploadMessage.style.visibility = 'visible';
+        uploadMessage.style.transform = 'translateY(0)';
     }
 
     // Function to clear a message container
     function clearMessage(container) {
         container.innerHTML = '';
         container.className = 'message-container';
+        container.style.opacity = '0';
+        container.style.visibility = 'hidden';
+        container.style.transform = 'translateY(10px)';
     }
 
     console.log("JavaScript initialization complete");
