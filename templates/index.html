@@ -4,20 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BriefEngine - Document Summarizer</title>
+    <title>BriefEngine</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
-    <style>
-        /* Make sure tabs work correctly */
-        .tab-content {
-            display: none !important;
-        }
-
-        .tab-content.active {
-            display: flex !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -51,24 +41,30 @@
                     <div class="options-section">
                         <div class="option-group">
                             <label for="summary-length-upload">Summary Length:</label>
-                            <select id="summary-length-upload">
-                                <option value="very-short">Very Short</option>
-                                <option value="short">Short</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="long">Long</option>
-                                <option value="very-long">Very Long</option>
-                            </select>
+                            <div class="select-container">
+                                <select id="summary-length-upload">
+                                    <option value="very-short">Very Short</option>
+                                    <option value="short">Short</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="long">Long</option>
+                                    <option value="very-long">Very Long</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
                         </div>
 
                         <div class="option-group">
                             <label for="summary-type-upload">Summary Style:</label>
-                            <select id="summary-type-upload">
-                                <option value="paragraph" selected>Paragraph</option>
-                                <option value="bullet-points">Bullet Points</option>
-                                <option value="numbered-list">Numbered List</option>
-                                <option value="key-points">Key Points</option>
-                                <option value="executive">Executive Summary</option>
-                            </select>
+                            <div class="select-container">
+                                <select id="summary-type-upload">
+                                    <option value="paragraph" selected>Paragraph</option>
+                                    <option value="bullet-points">Bullet Points</option>
+                                    <option value="numbered-list">Numbered List</option>
+                                    <option value="key-points">Key Points</option>
+                                    <option value="executive">Executive Summary</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -85,24 +81,30 @@
                     <div class="options-section">
                         <div class="option-group">
                             <label for="summary-length-text">Summary Length:</label>
-                            <select id="summary-length-text">
-                                <option value="very-short">Very Short</option>
-                                <option value="short">Short</option>
-                                <option value="medium" selected>Medium</option>
-                                <option value="long">Long</option>
-                                <option value="very-long">Very Long</option>
-                            </select>
+                            <div class="select-container">
+                                <select id="summary-length-text">
+                                    <option value="very-short">Very Short</option>
+                                    <option value="short">Short</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="long">Long</option>
+                                    <option value="very-long">Very Long</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
                         </div>
 
                         <div class="option-group">
                             <label for="summary-type-text">Summary Style:</label>
-                            <select id="summary-type-text">
-                                <option value="paragraph" selected>Paragraph</option>
-                                <option value="bullet-points">Bullet Points</option>
-                                <option value="numbered-list">Numbered List</option>
-                                <option value="key-points">Key Points</option>
-                                <option value="executive">Executive Summary</option>
-                            </select>
+                            <div class="select-container">
+                                <select id="summary-type-text">
+                                    <option value="paragraph" selected>Paragraph</option>
+                                    <option value="bullet-points">Bullet Points</option>
+                                    <option value="numbered-list">Numbered List</option>
+                                    <option value="key-points">Key Points</option>
+                                    <option value="executive">Executive Summary</option>
+                                </select>
+                                <div class="select-arrow"></div>
+                            </div>
                         </div>
                     </div>
 

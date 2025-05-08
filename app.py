@@ -101,7 +101,26 @@ Rules:
 - Capture the key points and main ideas
 - Be concise but comprehensive
 - Preserve important details, names, dates, and facts
-- No introductions or additional text
+- Start directly with the content, without any introductory phrases
+- NEVER start with "This document", "This text", "The document", "The text", or similar phrases
+- NEVER use phrases like "This document discusses", "This text explains", or "The content describes"
+- NEVER refer to the document, text, article, or content itself in any way
+- NEVER use phrases like "Here is a summary" or "In conclusion"
+- NEVER include introductions, conclusions, or meta-commentary
+- Present the information directly as standalone content
+
+Example of what to avoid:
+"This document serves as an overview for a Machine Learning course..."
+"The text explains that machine learning requires basic computer science expertise..."
+"Here is a cohesive medium combined summary of the sections..."
+
+Example of good output format for paragraph style:
+"Machine Learning courses require basic computer science expertise. Students need knowledge of data structures and Big O notation. The course emphasizes application across various domains."
+
+Example of good output format for bullet points:
+"• Machine Learning requires basic computer science expertise
+• Students need knowledge of data structures and Big O notation
+• The course emphasizes application across various domains"
 </instruction>
 
 <text>
@@ -157,7 +176,26 @@ Rules:
 - Combine all important information
 - Eliminate redundancies
 - Create a smooth, cohesive summary
-- No introductions or additional text
+- Start directly with the content, without any introductory phrases
+- NEVER start with "This document", "This text", "The document", "The text", or similar phrases
+- NEVER use phrases like "This document discusses", "This text explains", or "The content describes"
+- NEVER refer to the document, text, article, or content itself in any way
+- NEVER use phrases like "Based on the summaries" or "The documents discuss"
+- NEVER include introductions, conclusions, or meta-commentary
+- Present the information directly as standalone content
+
+Example of what to avoid:
+"This document serves as an overview for a Machine Learning course..."
+"Based on the summaries, machine learning requires basic computer science expertise..."
+"Here is a cohesive medium combined summary of the sections..."
+
+Example of good output format for paragraph style:
+"Machine Learning courses require basic computer science expertise. Students need knowledge of data structures and Big O notation. The course emphasizes application across various domains."
+
+Example of good output format for bullet points:
+"• Machine Learning requires basic computer science expertise
+• Students need knowledge of data structures and Big O notation
+• The course emphasizes application across various domains"
 </instruction>
 
 <section_summaries>
