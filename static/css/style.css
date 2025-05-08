@@ -4,26 +4,32 @@
     --heading-font: 'Audiowide', cursive;
     --body-font: 'Roboto Mono', monospace;
 
-    --primary-color: #4f46e5;
-    --primary-light: #6366f1;
-    --secondary-color: #00c4cc;
+    /* New color palette */
+    --primary-color: #6d28d9; /* Purple */
+    --primary-light: #8b5cf6; /* Light purple */
+    --secondary-color: #0d9488; /* Teal */
     --primary-gradient: linear-gradient(to right, var(--primary-light), var(--secondary-color));
-    --secondary-light: #8b5cf6;
+    --secondary-light: #a78bfa; /* Light purple */
     --background-color: transparent;
-    --text-color: #ffffff;
-    --card-bg: rgba(40, 40, 80, 0.6);
-    --card-bg-hover: rgba(60, 60, 100, 0.7);
-    --card-border: rgba(70, 70, 180, 0.35);
-    --card-border-hover: rgba(100, 100, 240, 0.7);
-    --text-shadow: rgba(79, 70, 229, 0.3);
+    --text-color: #f9fafb; /* Off-white */
+    --card-bg: rgba(30, 41, 59, 0.7); /* Dark blue-gray */
+    --card-bg-hover: rgba(44, 55, 74, 0.8); /* Lighter blue-gray */
+    --card-border: rgba(71, 85, 105, 0.4); /* Medium blue-gray */
+    --card-border-hover: rgba(94, 234, 212, 0.6); /* Teal accent */
+    --text-shadow: rgba(109, 40, 217, 0.3); /* Purple shadow */
     --shadow-size-large: 10px;
     --shadow-size-medium: 8px;
     --shadow-size-small: 6px;
-    --card-shadow: rgba(20, 20, 40, 0.25);
-    --card-shadow-hover: rgba(20, 20, 40, 0.4);
-    --glow-shadow: rgba(99, 102, 241, 0.35);
+    --card-shadow: rgba(15, 23, 42, 0.3); /* Dark shadow */
+    --card-shadow-hover: rgba(15, 23, 42, 0.5); /* Darker shadow on hover */
+    --glow-shadow: rgba(139, 92, 246, 0.4); /* Purple glow */
     --error-color: #ef4444;
     --success-color: #10b981;
+    
+    /* Title colors */
+    --title-first-color: #00c8ff; /* Bright cyan that complements the blue background */
+    --title-second-color: #ffffff; /* White */
+    --title-glow: 0 0 5px rgba(139, 92, 246, 0.7); /* Subtle neon glow */
 }
 
 * {
@@ -61,7 +67,7 @@ canvas {
     height: 100vh; /* Use viewport height */
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 0; /* Remove bottom padding */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -76,7 +82,7 @@ header {
 }
 
 header h1 {
-    font-family: var(--heading-font);
+    font-family: var(--heading-font) !important;
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -84,20 +90,26 @@ header h1 {
     letter-spacing: 1px;
 }
 
+.title-first, .title-second {
+    font-family: var(--heading-font) !important;
+}
+
 .title-first {
-    color: var(--primary-light);
+    color: var(--title-first-color);
+    text-shadow: var(--title-glow);
 }
 
 .title-second {
-    color: var(--secondary-color);
+    color: var(--title-second-color);
+    text-shadow: var(--title-glow);
 }
 
-header p {
+header p, .subtitle p {
     font-family: var(--body-font);
     font-size: 1.2rem;
     opacity: 0.9;
-    font-weight: 300;
-    text-shadow: 0 0 var(--shadow-size-small) var(--text-shadow);
+    font-weight: 500;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
 }
 
 main {
@@ -185,12 +197,13 @@ textarea {
     background-color: rgba(20, 20, 40, 0.4);
     color: var(--text-color);
     font-family: var(--body-font);
+    min-height: 200px; /* Fixed height to match upload area */
 }
 
 textarea:focus {
     outline: none;
     border-color: var(--primary-light);
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
 .upload-area {
@@ -202,27 +215,27 @@ textarea:focus {
     color: var(--text-color);
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(20, 20, 40, 0.3);
+    min-height: 200px; /* Fixed height to match textarea */
+    /* Fixed hover bug by removing overflow: hidden */
 }
 
 .upload-area:hover {
     border-color: var(--primary-light);
-    background-color: rgba(99, 102, 241, 0.2);
-    transform: translateY(-2px);
+    background-color: rgba(139, 92, 246, 0.2);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Fixed hover bug by removing transform */
 }
 
 .upload-area.highlight {
     border-color: var(--primary-light);
-    background-color: rgba(99, 102, 241, 0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    background-color: rgba(139, 92, 246, 0.25);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
 .upload-area i {
@@ -265,7 +278,7 @@ textarea:focus {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 0.75rem 0;
+    margin: 1rem 0; /* Standardized margin for consistent spacing */
     flex-shrink: 0; /* Don't shrink options */
 }
 
@@ -278,6 +291,7 @@ textarea:focus {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    color: var(--primary-light); /* Match label color to theme */
 }
 
 select {
@@ -289,12 +303,26 @@ select {
     color: var(--text-color);
     font-family: var(--body-font);
     font-size: 1rem;
+    appearance: none; /* Remove default arrow */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 select:focus {
     outline: none;
     border-color: var(--primary-light);
-    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+select:hover {
+    border-color: var(--primary-light);
+    background-color: rgba(30, 30, 60, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .primary-button, .secondary-button {
@@ -317,13 +345,13 @@ select:focus {
     background: var(--primary-gradient);
     color: var(--text-color);
     width: 100%;
-    margin-top: 0.75rem; /* Reduced margin */
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    margin-top: 1rem; /* Standardized margin */
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
 .primary-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
 }
 
 .secondary-button {
@@ -334,8 +362,8 @@ select:focus {
 }
 
 .secondary-button:hover {
-    background-color: rgba(99, 102, 241, 0.1);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    background-color: rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
 .secondary-button:disabled {
@@ -400,11 +428,12 @@ select:focus {
 
 footer {
     text-align: center;
-    margin-top: auto; /* Push to bottom */
-    padding: 0.5rem 0;
+    padding: 1rem 0 1rem;
     color: var(--text-color);
     opacity: 0.7;
-    flex-shrink: 0; /* Don't shrink footer */
+    flex-shrink: 0;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 footer a {
@@ -443,7 +472,7 @@ footer a:hover {
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid rgba(99, 102, 241, 0.3);
+    border: 4px solid rgba(139, 92, 246, 0.3);
     border-radius: 50%;
     border-top-color: var(--primary-light);
     animation: spin 1s linear infinite;
@@ -472,8 +501,8 @@ footer a:hover {
     width: 100%;
     height: 100%;
     background: 
-        linear-gradient(rgba(99, 102, 241, 0.5) 1px, transparent 1px) 0 0 / 20px 20px,
-        linear-gradient(90deg, rgba(99, 102, 241, 0.5) 1px, transparent 1px) 0 0 / 20px 20px;
+        linear-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1px) 0 0 / 20px 20px,
+        linear-gradient(90deg, rgba(139, 92, 246, 0.5) 1px, transparent 1px) 0 0 / 20px 20px;
     animation: gridMove 3s linear infinite;
 }
 
@@ -541,18 +570,20 @@ footer a:hover {
     flex-direction: column;
     flex: 1;
     overflow: hidden; /* Prevent scrolling */
-}
-
-#file-upload-section > *, #text-input-section > * {
-    margin-bottom: 0.5rem;
-}
-
-#file-upload-section > :last-child, #text-input-section > :last-child {
-    margin-bottom: 0;
+    gap: 1rem; /* Standardized gap for consistent spacing */
 }
 
 .logo {
     margin-bottom: 0.25rem;
+}
+
+.logo h1 {
+    font-family: var(--heading-font);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 var(--shadow-size-large) var(--text-shadow);
+    letter-spacing: 1px;
 }
 
 .subtitle {
@@ -579,4 +610,4 @@ footer a:hover {
     .input-section, .output-section {
         padding: 1rem;
     }
-} 
+}

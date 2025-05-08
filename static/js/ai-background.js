@@ -48,7 +48,8 @@ function draw() {
     // Lighter color palette with a subtle gradient
     let color1 = color(35, 55, 95);  // Darker blue
     let color2 = color(45, 90, 130); // Softer blue gradient with a hint of teal
-    drawGradientBackground(color1, color2);
+    // Reversed gradient - light color on top, dark color on bottom
+    drawGradientBackground(color2, color1);
 
     // Update and display neurons
     neurons.forEach(neuron => {
