@@ -6,19 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileUploadSection = document.getElementById('file-upload-section');
     const inputText = document.getElementById('input-text');
     
-    // New selectors for separate options and buttons
+    // Options selectors
     const summaryLengthText = document.getElementById('summary-length-text');
     const summaryTypeText = document.getElementById('summary-type-text');
     const summaryLengthUpload = document.getElementById('summary-length-upload');
     const summaryTypeUpload = document.getElementById('summary-type-upload');
     const summarizeTextBtn = document.getElementById('summarize-text-btn');
     const summarizeUploadBtn = document.getElementById('summarize-upload-btn');
-    
-    // New advanced options
-    const focusText = document.getElementById('focus-text');
-    const toneText = document.getElementById('tone-text');
-    const focusUpload = document.getElementById('focus-upload');
-    const toneUpload = document.getElementById('tone-upload');
     
     // Message containers
     const textMessage = document.getElementById('text-message');
@@ -191,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function uploadFile(file) {
         console.log("Uploading file to server");
         loadingOverlay.classList.add('active');
-        loadingOverlay.querySelector('p').textContent = 'Processing your document...';
+        loadingOverlay.querySelector('p').textContent = 'Processing document data stream...';
         
         const formData = new FormData();
         formData.append('file', file);
@@ -217,9 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 uploadedFileName = data.filename;
                 
                 // Show success message in upload area
-                showUploadMessage(`Successfully processed "${data.filename}". Click "Generate Summary from Document" to create a summary.`, 'success');
+                showUploadMessage(`Document "${data.filename}" processed successfully. Click "Generate" to create a summary.`, 'success');
                 
-                // The user stays in the Upload tab and can click the summarize button there
+                // The user stays in the Upload tab and can click the generate button there
             } else {
                 throw new Error(data.error || 'Unknown error occurred');
             }
@@ -235,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Generate summary from text input
     summarizeTextBtn.addEventListener('click', function() {
-        console.log("Generate summary from text button clicked");
+        console.log("Generate button clicked in text tab");
         const text = inputText.value.trim();
         
         if (!text) {
@@ -254,15 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
         generateSummary(
             text, 
             summaryLengthText.value, 
-            summaryTypeText.value,
-            focusText.value,
-            toneText.value
+            summaryTypeText.value
         );
     });
 
     // Generate summary from uploaded document
     summarizeUploadBtn.addEventListener('click', function() {
-        console.log("Generate summary from document button clicked");
+        console.log("Generate button clicked in upload tab");
         if (!uploadedDocumentText) {
             showUploadMessage('Please upload a document first.', 'error');
             return;
@@ -274,9 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
         generateSummary(
             uploadedDocumentText, 
             summaryLengthUpload.value, 
-            summaryTypeUpload.value,
-            focusUpload.value,
-            toneUpload.value
+            summaryTypeUpload.value
         );
     });
 
@@ -300,19 +290,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to generate summary via API
-    function generateSummary(text, length, type, focus, tone) {
-        console.log("Generating summary with:", { length, type, focus, tone });
+    function generateSummary(text, length, type) {
+        console.log("Generating summary with:", { length, type });
         // Show loading overlay
         loadingOverlay.classList.add('active');
-        loadingOverlay.querySelector('p').textContent = 'Generating your summary...';
+        loadingOverlay.querySelector('p').textContent = 'Neural processing in progress...';
         
         // Prepare request data
         const requestData = {
             text: text,
             summary_length: length,
-            summary_type: type,
-            focus: focus,
-            tone: tone
+            summary_type: type
         };
 
         console.log("Sending API request with data:", requestData);

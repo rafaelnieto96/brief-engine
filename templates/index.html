@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}">
     <style>
-        /* Asegurarnos que las pestañas funcionan correctamente */
+        /* Make sure tabs work correctly */
         .tab-content {
             display: none !important;
         }
@@ -23,8 +23,12 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-file-alt"></i> BriefEngine</h1>
-            <p>AI-powered document summarization</p>
+            <div class="logo">
+                <h1><span class="title-first">Brief</span><span class="title-second">Engine</span></h1>
+            </div>
+            <div class="subtitle">
+                <p>Neural document synthesis & extraction</p>
+            </div>
         </header>
 
         <main>
@@ -68,37 +72,8 @@
                         </div>
                     </div>
 
-                    <div class="advanced-options">
-                        <details>
-                            <summary>
-                                <i class="fas fa-cog"></i> Advanced Options
-                            </summary>
-                            <div class="advanced-options-content">
-                                <div class="option-group">
-                                    <label for="focus-upload">Focus on:</label>
-                                    <select id="focus-upload">
-                                        <option value="balanced" selected>Balanced</option>
-                                        <option value="facts">Facts & Data</option>
-                                        <option value="concepts">Main Concepts</option>
-                                        <option value="conclusions">Conclusions</option>
-                                        <option value="arguments">Arguments</option>
-                                    </select>
-                                </div>
-                                <div class="option-group">
-                                    <label for="tone-upload">Tone:</label>
-                                    <select id="tone-upload">
-                                        <option value="neutral" selected>Neutral</option>
-                                        <option value="academic">Academic</option>
-                                        <option value="business">Business</option>
-                                        <option value="conversational">Conversational</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-
                     <button id="summarize-upload-btn" class="primary-button">
-                        <i class="fas fa-magic"></i> Generate Summary from Document
+                        <i class="fas fa-magic"></i> Generate
                     </button>
                 </div>
 
@@ -131,37 +106,8 @@
                         </div>
                     </div>
 
-                    <div class="advanced-options">
-                        <details>
-                            <summary>
-                                <i class="fas fa-cog"></i> Advanced Options
-                            </summary>
-                            <div class="advanced-options-content">
-                                <div class="option-group">
-                                    <label for="focus-text">Focus on:</label>
-                                    <select id="focus-text">
-                                        <option value="balanced" selected>Balanced</option>
-                                        <option value="facts">Facts & Data</option>
-                                        <option value="concepts">Main Concepts</option>
-                                        <option value="conclusions">Conclusions</option>
-                                        <option value="arguments">Arguments</option>
-                                    </select>
-                                </div>
-                                <div class="option-group">
-                                    <label for="tone-text">Tone:</label>
-                                    <select id="tone-text">
-                                        <option value="neutral" selected>Neutral</option>
-                                        <option value="academic">Academic</option>
-                                        <option value="business">Business</option>
-                                        <option value="conversational">Conversational</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </details>
-                    </div>
-
                     <button id="summarize-text-btn" class="primary-button">
-                        <i class="fas fa-magic"></i> Generate Summary from Text
+                        <i class="fas fa-magic"></i> Generate
                     </button>
                 </div>
             </div>
@@ -183,7 +129,11 @@
 
         <div id="loading-overlay">
             <div class="spinner"></div>
-            <p>Generating your summary...</p>
+            <p>Neural processing in progress...</p>
+            <div class="tech-loader">
+                <div class="tech-lines"></div>
+                <div class="tech-progress"></div>
+            </div>
         </div>
     </div>
 

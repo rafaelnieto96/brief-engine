@@ -45,8 +45,9 @@ function drawGradientBackground(c1, c2) {
 }
 
 function draw() {
-    let color1 = color(30, 30, 70);
-    let color2 = color(70, 30, 80);
+    // Lighter color palette with a subtle gradient
+    let color1 = color(35, 55, 95);  // Darker blue
+    let color2 = color(45, 90, 130); // Softer blue gradient with a hint of teal
     drawGradientBackground(color1, color2);
 
     // Update and display neurons
@@ -59,6 +60,7 @@ function draw() {
     drawNeuralConnections();
 
     // Global pulse effect - disable on mobile for better performance
+    // Make cursor waves less visible
     if (window.innerWidth > 768) {
         globalPulseEffect();
     }
@@ -74,7 +76,8 @@ class Neuron {
         const baseSize = window.innerWidth < 768 ? 6 : 8;
         this.targetSize = random(baseSize, baseSize * 1.8);
 
-        this.hue = random(180, 220);
+        // Blue to teal color palette
+        this.hue = random(180, 205);
     }
 
     update() {
@@ -105,14 +108,14 @@ class Neuron {
         let alpha = 150 + 105 * sin(frameCount * 0.1);
 
         // Inner glow effect
-        fill(this.hue, 200, 255, alpha * 0.5);
+        fill(this.hue, 180, 255, alpha * 0.5);
         noStroke();
         ellipse(this.pos.x, this.pos.y, glowSize);
 
         // Main body
-        stroke(this.hue, 200, 255, alpha);
+        stroke(this.hue, 180, 255, alpha);
         strokeWeight(window.innerWidth < 768 ? 1.5 : 2);
-        fill(30, 50, 80);
+        fill(25, 55, 85);
         ellipse(this.pos.x, this.pos.y, this.targetSize);
     }
 }
@@ -137,7 +140,7 @@ function drawNeuralConnections() {
                 let pulse = (sin(frameCount * pulseSpeed + dist * 0.01) + 1) * 0.5;
                 alpha *= pulse;
 
-                stroke(a.hue, 200, 255, alpha);
+                stroke(a.hue, 180, 255, alpha);
                 strokeWeight(lineWidth);
                 line(a.pos.x, a.pos.y, b.pos.x, b.pos.y);
             }
@@ -146,11 +149,11 @@ function drawNeuralConnections() {
 }
 
 function globalPulseEffect() {
-    // Expanding wave effect from mouse - more subtle on mobile
+    // Reducing visibility of cursor waves
     noFill();
-    stroke(180, 100, 255, window.innerWidth < 768 ? 40 : 70);
-    strokeWeight(window.innerWidth < 768 ? 1 : 1.5);
-    let pulseSize = (frameCount % 120) * (window.innerWidth < 768 ? 3 : 4);
+    stroke(160, 240, 255, 25); // More teal-ish but still very subtle
+    strokeWeight(window.innerWidth < 768 ? 0.8 : 1);
+    let pulseSize = (frameCount % 120) * (window.innerWidth < 768 ? 2 : 3);
     ellipse(mouseX, mouseY, pulseSize, pulseSize);
 }
 
